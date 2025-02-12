@@ -1,0 +1,13 @@
+Here we are using a single dockerfile to serve two services one angular project and nginx together
+where nginx will listen on the same port where actual prject listenning not on 80.
+
+*****Important****
+To serve angular project need to add default index.html page which can be found in dist directory
+which create when you run npm run build which create dist directory and give path to this dir and get index.html
+otherwise nginx will pick its own default page and you will not able to see any output.
+
+
+2nd thing
+
+use localhost when serving application or _ reason when you create certificate then this can run on anyserver
+because you are using localhost which represent instance ip which is public.
