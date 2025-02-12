@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  ezzygo:
+    image: vinay0981123/izzygo-uat:latest
+    container_name: ezzygo
+    ports:
+      - "7071:7071"
+      - "9713:9713"
+    restart: always
+    environment:
+      TEAMSFX_ENV: ${TEAMSFX_ENV}
+      APP_NAME_SUFFIX: ${APP_NAME_SUFFIX}
+      TAB_DOMAIN: ${TAB_DOMAIN}
+      TAB_ENDPOINT: ${TAB_ENDPOINT}
+      TEAMS_APP_ID: ${TEAMS_APP_ID}
+      TEAMS_APP_TENANT_ID: ${TEAMS_APP_TENANT_ID}
+      AAD_APP_CLIENT_ID: ${AAD_APP_CLIENT_ID}
+      AAD_APP_OBJECT_ID: ${AAD_APP_OBJECT_ID}
+      AAD_APP_TENANT_ID: ${AAD_APP_TENANT_ID}
+      AAD_APP_OAUTH_AUTHORITY_HOST: ${AAD_APP_OAUTH_AUTHORITY_HOST}
+      AAD_APP_ACCESS_AS_USER_PERMISSION_ID: ${AAD_APP_ACCESS_AS_USER_PERMISSION_ID}
+      TEAMS_APP_PACKAGE_PATH: ${TEAMS_APP_PACKAGE_PATH}
+      FUNC_NAME: ${FUNC_NAME}
+      FUNC_ENDPOINT: ${FUNC_ENDPOINT}
+      TAB_HOSTNAME: ${TAB_HOSTNAME}
+      M365_TITLE_ID: ${M365_TITLE_ID}
+      M365_APP_ID: ${M365_APP_ID}
+      AAD_APP_OAUTH_AUTHORITY: ${AAD_APP_OAUTH_AUTHORITY}
+      SSL_CRT_FILE: ${SSL_CRT_FILE}
+      SSL_KEY_FILE: ${SSL_KEY_FILE}
+    networks:
+      - custom_network
+
+
+#  nginx:
+#   image: vinay0981123/nginx-selfsigned:latest
+#    container_name: nginx
+#    restart: always
+#    networks:
+#      - custom_network
+#    ports:
+#      - "7071:7071"
+#      - "9713:9713"
+
+networks:
+  custom_network:
+    driver: bridge

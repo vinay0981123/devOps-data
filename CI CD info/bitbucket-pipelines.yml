@@ -1,0 +1,87 @@
+pipelines:
+  tags:
+    'v*':
+      - step:
+          name: "Build and Push jarvis-clickhouse-server to ACR"
+          services:
+            - docker
+          script:
+            - echo "Logging in to Azure Container Registry..."
+            - docker login $ACR_REGISTRY -u $ACR_USERNAME -p $ACR_PASSWORD
+            - echo "Navigating to clickhouse directory..."
+            - cd stack-monitoring/clickhouse/
+            - echo "Building Docker image for jarvis-clickhouse-server..."
+            - docker build -t apexjarvis.azurecr.io/jarvis-clickhouse-server:latest .
+            - echo "Pushing Docker image to ACR..."
+            - docker push apexjarvis.azurecr.io/jarvis-clickhouse-server:latest
+
+      - step:
+          name: "Build and Push jarvis-signoz-query-service to ACR"
+          services:
+            - docker
+          script:
+            - echo "Logging in to Azure Container Registry..."
+            - docker login $ACR_REGISTRY -u $ACR_USERNAME -p $ACR_PASSWORD
+            - echo "Navigating to query-service directory..."
+            - cd stack-monitoring/query-service/
+            - echo "Building Docker image for jarvis-signoz-query-service..."
+            - docker build -t apexjarvis.azurecr.io/jarvis-signoz-query-service:latest .
+            - echo "Pushing Docker image to ACR..."
+            - docker push apexjarvis.azurecr.io/jarvis-signoz-query-service:latest
+
+      - step:
+          name: "Build and Push jarvis-signoz-frontend to ACR"
+          services:
+            - docker
+          script:
+            - echo "Logging in to Azure Container Registry..."
+            - docker login $ACR_REGISTRY -u $ACR_USERNAME -p $ACR_PASSWORD
+            - echo "Navigating to signoz-frontend directory..."
+            - cd stack-monitoring/signoz-frontend/
+            - echo "Building Docker image for jarvis-signoz-frontend..."
+            - docker build -t apexjarvis.azurecr.io/jarvis-signoz-frontend:latest .
+            - echo "Pushing Docker image to ACR..."
+            - docker push apexjarvis.azurecr.io/jarvis-signoz-frontend:latest
+
+      - step:
+          name: "Build and Push jarvis-signoz-otel-collector to ACR"
+          services:
+            - docker
+          script:
+            - echo "Logging in to Azure Container Registry..."
+            - docker login $ACR_REGISTRY -u $ACR_USERNAME -p $ACR_PASSWORD
+            - echo "Navigating to otel-collector directory..."
+            - cd stack-monitoring/otel-collector/
+            - echo "Building Docker image for jarvis-signoz-otel-collector..."
+            - docker build -t apexjarvis.azurecr.io/jarvis-signoz-otel-collector:latest .
+            - echo "Pushing Docker image to ACR..."
+            - docker push apexjarvis.azurecr.io/jarvis-signoz-otel-collector:latest
+
+      - step:
+          name: "Build and Push jarvis-nginx to ACR"
+          services:
+            - docker
+          script:
+            - echo "Logging in to Azure Container Registry..."
+            - docker login $ACR_REGISTRY -u $ACR_USERNAME -p $ACR_PASSWORD
+            - echo "Navigating to nginx directory..."
+            - cd stack-images/nginx/
+            - echo "Building Docker image for jarvis-nginx..."
+            - docker build -t apexjarvis.azurecr.io/jarvis-nginx:latest .
+            - echo "Pushing Docker image to ACR..."
+            - docker push apexjarvis.azurecr.io/jarvis-nginx:latest
+
+      - step:
+          name: "Build and Push jarvis-litellm to ACR"
+          services:
+            - docker
+          script:
+            - echo "Logging in to Azure Container Registry..."
+            - docker login $ACR_REGISTRY -u $ACR_USERNAME -p $ACR_PASSWORD
+            - echo "Navigating to nginx directory..."
+            - cd stack-images/litellm/
+            - echo "Building Docker image for jarvis-litellm..."
+            - docker build -t apexjarvis.azurecr.io/jarvis-litellm:latest .
+            - echo "Pushing Docker image to ACR..."
+            - docker push apexjarvis.azurecr.io/jarvis-litellm:latest
+            
