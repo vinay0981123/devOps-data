@@ -1,0 +1,14 @@
+version: "3.3"
+services:
+  avatar:
+    image: vinay0981123/avatar-nginx:latest
+    container_name: avatar
+    ports:
+      - "8009:4200"
+    restart: always
+    networks:
+      - custom_network
+
+networks:
+  custom_network:
+    driver: bridge

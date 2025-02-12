@@ -1,0 +1,3 @@
+This is react frontend + backend node project which run in single command
+and use two files .crt and .key to serve project with https in which frontend
+is on 9713 and backend is on 7071.
